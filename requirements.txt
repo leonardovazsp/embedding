@@ -1,0 +1,6 @@
+fastapi
+pydantic
+torch
+transformers
+xformers
+uvicorn
