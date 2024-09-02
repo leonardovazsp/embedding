@@ -61,6 +61,8 @@ async def load_model(model_name: str):
         tokenizer = AutoTokenizer.from_pretrained(model_path)
         model = AutoModel.from_pretrained(model_path, trust_remote_code=True)
         model.to(device)
+        if torch.cuda.device_count() > 1:
+            model = torch.nn.DataParallel(model)
         model_cache[model_name] = (tokenizer, model)
     return model_cache[model_name]
 
